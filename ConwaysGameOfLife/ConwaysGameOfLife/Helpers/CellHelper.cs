@@ -35,27 +35,42 @@ namespace ConwaysGameOfLife.Helpers
         {
             int neighbours = 0;
 
-            if (cellArray[i + 1, j] == 1)
-                neighbours++;
-            if (cellArray[i + 1, j + 1] == 1)
-                neighbours++;
-            if (cellArray[i, j + 1] == 1)
-                neighbours++;
+
+            if (i + 1 < cellArray.GetLength(0))
+            {
+                if (cellArray[i + 1, j] == 1)
+                    neighbours++;
+                if (j + 1 < cellArray.GetLength(1))
+                {
+                    if (cellArray[i + 1, j + 1] == 1)
+                        neighbours++;
+                    if (cellArray[i, j + 1] == 1)
+                        neighbours++;
+                }
+            }
+
+
 
             if(i > 0)
             {
                 if (cellArray[i - 1, j] == 1)
                     neighbours++;
-                if (cellArray[i - 1, j + 1] == 1)
-                    neighbours++;
+                if (j + 1 < cellArray.GetLength(1))
+                {
+                    if (cellArray[i - 1, j + 1] == 1)
+                        neighbours++;
+                }
             }
 
             if(j > 0)
             {
                 if (cellArray[i, j - 1] == 1)
                     neighbours++;
-                if (cellArray[i + 1, j - 1] == 1)
-                    neighbours++;
+                if (i + 1 < cellArray.GetLength(0))
+                {
+                    if (cellArray[i + 1, j - 1] == 1)
+                        neighbours++;
+                }
             }
 
             if(i > 0 && j > 0)

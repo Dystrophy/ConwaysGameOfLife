@@ -8,7 +8,7 @@ namespace ConwaysGameOfLifeTests
     public class GridHelperTest
     {
         [TestMethod]
-        public void GenerateNextGeneration_ReturnsNew2DIntArray()
+        public void GenerateNextGeneration_ReturnsNewMultidimensionalIntArray()
         {
             var returnedVal = GridHelper.GenerateNextGeneration(new int[1,1]);
 
