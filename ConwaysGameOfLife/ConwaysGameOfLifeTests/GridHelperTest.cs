@@ -47,7 +47,7 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(returnedArray[2, 0] == 1);
         }
         [TestMethod]
-        public void AGlider_WillGlideOnNextGeneration()
+        public void AGlider_WillGenerateApprpriatecells_OnNextGeneration()
         {
             var returnedArray = GridHelper.GenerateGlider();
 
@@ -58,6 +58,19 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(nextGeneration[2, 2] == 1);
             Assert.IsTrue(nextGeneration[2, 1] == 1);
             Assert.IsTrue(nextGeneration[3, 1] == 1);
+        }
+        [TestMethod]
+        public void CreateInitialContainer_SetsIntialStateOfGame_ToStateThatIsPassedIn()
+        {
+            var gliderState = GridHelper.GenerateGlider();
+
+            var returnedArray = GridHelper.CreateInitialContainer(gliderState);
+
+            Assert.IsTrue(returnedArray[0, 1] == 1);
+            Assert.IsTrue(returnedArray[1, 2] == 1);
+            Assert.IsTrue(returnedArray[2, 2] == 1);
+            Assert.IsTrue(returnedArray[2, 1] == 1);
+            Assert.IsTrue(returnedArray[2, 0] == 1);
         }
 
 

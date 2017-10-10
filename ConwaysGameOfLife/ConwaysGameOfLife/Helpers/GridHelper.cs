@@ -37,9 +37,15 @@ namespace ConwaysGameOfLife.Helpers
             return nextGenerationArray;
         }
 
-        public static int[,] CreateInitialContainer(int xSize = 10, int ySize = 10)
+        public static int[,] CreateInitialContainer(int[,] currentGeneration = null, int xSize = 10, int ySize = 10)
         {
             var initialState = new int[xSize, ySize];
+
+            if(currentGeneration != null)
+            {
+                initialState = currentGeneration;
+                return initialState;
+            }
 
             for (int i = 0; i < xSize; i++)
             {
@@ -49,8 +55,9 @@ namespace ConwaysGameOfLife.Helpers
                 }
             }
             return initialState;
-            
         }
+
+        
 
         public static int[,] GenerateGlider()
         {
