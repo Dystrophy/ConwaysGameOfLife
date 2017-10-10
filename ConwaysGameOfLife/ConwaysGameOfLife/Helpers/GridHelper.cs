@@ -37,5 +37,33 @@ namespace ConwaysGameOfLife.Helpers
             return nextGenerationArray;
         }
 
+        public static int[,] CreateInitialContainer(int xSize = 10, int ySize = 10)
+        {
+            var initialState = new int[xSize, ySize];
+
+            for (int i = 0; i < xSize; i++)
+            {
+                for (int j = 0; j < ySize; j++)
+                {
+                    initialState[i, j] = 0;
+                }
+            }
+            return initialState;
+            
+        }
+
+        public static int[,] GenerateGlider()
+        {
+
+            var gliderState = CreateInitialContainer();
+            gliderState[0, 1] = 1;
+            gliderState[1, 2] = 1;
+            gliderState[2, 2] = 1;
+            gliderState[2, 1] = 1;
+            gliderState[2, 0] = 1;
+
+            return gliderState;
+        }
+
     }
 }

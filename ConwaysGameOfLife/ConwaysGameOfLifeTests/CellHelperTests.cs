@@ -86,5 +86,23 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(cellArray.GetLength(0) == returnedGeneration.GetLength(0));
             Assert.IsTrue(cellArray.GetLength(1) == returnedGeneration.GetLength(1));
         }
+
+        [TestMethod]
+        public void GetNextGeneration_CellWillBecomeAliveWhen3Neighbours()
+        {
+            var cellArray = new int[2, 2];
+
+            cellArray[0, 0] = 0;
+            cellArray[0, 1] = 1;
+            cellArray[1, 0] = 1;
+            cellArray[1, 1] = 1;
+
+            var returnedArray = CellHelper.GetNextGeneration(cellArray);
+
+            Assert.IsTrue(returnedArray[0, 0] == 1);
+            Assert.IsTrue(returnedArray[0, 1] == 1);
+            Assert.IsTrue(returnedArray[1, 1] == 1);
+            Assert.IsTrue(returnedArray[1, 1] == 1);
+        }
     }
 }
