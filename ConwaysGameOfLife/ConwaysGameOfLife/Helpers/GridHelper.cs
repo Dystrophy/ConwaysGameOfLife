@@ -21,8 +21,6 @@ namespace ConwaysGameOfLife.Helpers
                 }
                 Console.WriteLine();
             }
-
-
         }
 
         public static int[,] GenerateNextGeneration(int[,] currentGenerationArray)
@@ -33,12 +31,9 @@ namespace ConwaysGameOfLife.Helpers
             {
                 for (int j = 0; j < currentGenerationArray.GetLength(1); j++)
                 {
-                    //Call isCellAlive for each member in the array
-
-                    //Then if cell is alive next generation set the X and Y properties of the cell
+                    CellHelper.GetNextGeneration(currentGenerationArray);
                 }
             }
-
             return nextGenerationArray;
         }
 

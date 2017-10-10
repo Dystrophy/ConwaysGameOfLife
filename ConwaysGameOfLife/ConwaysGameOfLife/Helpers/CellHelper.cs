@@ -1,5 +1,4 @@
 ﻿using System;
-using ConwaysGameOfLife.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,18 +8,63 @@ namespace ConwaysGameOfLife.Helpers
 {
     public static class CellHelper
     {
-        public static bool IsCellAlive(int numberOfNeighbours)
+        public static int[,] GetNextGeneration(int[,] currentCellArray)
         {
-            if (!(numberOfNeighbours >= 2 && numberOfNeighbours <= 3))
+            int[,] nextGenerationCellArray = new int[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
+            for(int i = 0; i < currentCellArray.GetLength(1); i++)
             {
-                return false;
+                for(int j = 0; j < currentCellArray.GetLength(0); j++)
+                {
+                    nextGenerationCellArray[i, j] = IsCellAlive(GetCellNeighbours(currentCellArray, i, j));
+                }
             }
-            return true;
+
+            return nextGenerationCellArray;
         }
 
-        public static int NumberOfNeighbours(Cell cell)
+        public static int IsCellAlive(int numberOfNeighbours)
         {
-            return 0;
+            if (numberOfNeighbours > 3 || numberOfNeighbours < 2)
+            {
+                return 0;
+            }
+            return 1;
+        }
+
+        public static int GetCellNeighbours(int[,] cellArray, int i, int j)
+        {
+            int neighbours = 0;
+
+            if (cellArray[i + 1, j] == 1)
+                neighbours++;
+            if (cellArray[i + 1, j + 1] == 1)
+                neighbours++;
+            if (cellArray[i, j + 1] == 1)
+                neighbours++;
+
+            if(i > 0)
+            {
+                if (cellArray[i - 1, j] == 1)
+                    neighbours++;
+                if (cellArray[i - 1, j + 1] == 1)
+                    neighbours++;
+            }
+
+            if(j > 0)
+            {
+                if (cellArray[i, j - 1] == 1)
+                    neighbours++;
+                if (cellArray[i + 1, j - 1] == 1)
+                    neighbours++;
+            }
+
+            if(i > 0 && j > 0)
+            {
+                if (cellArray[i - 1, j - 1] == 1)
+                    neighbours++;
+            }
+
+            return neighbours;
         }
     }
 }

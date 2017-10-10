@@ -10,7 +10,7 @@ namespace ConwaysGameOfLife
     {
         static void Main(string[] args)
         {
-
+         
         }
     }
 }
