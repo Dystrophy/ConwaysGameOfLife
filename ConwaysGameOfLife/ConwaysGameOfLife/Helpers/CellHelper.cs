@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConwaysGameOfLife.Helpers
 {
-    public static class CellHelper
+    public class CellHelper
     {
-        public static int[,] GetNextGeneration(int[,] currentCellArray)
+        public int[,] GetNextGeneration(int[,] currentCellArray)
         {
             int[,] nextGenerationCellArray = new int[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
             for(int i = 0; i < currentCellArray.GetLength(1); i++)
@@ -22,7 +22,7 @@ namespace ConwaysGameOfLife.Helpers
             return nextGenerationCellArray;
         }
 
-        public static int IsCellAlive(int numberOfNeighbours)
+        public int IsCellAlive(int numberOfNeighbours)
         {
             if (numberOfNeighbours > 3 || numberOfNeighbours < 2)
             {
@@ -31,7 +31,7 @@ namespace ConwaysGameOfLife.Helpers
             return 1;
         }
 
-        public static int GetCellNeighbours(int[,] cellArray, int i, int j)
+        public int GetCellNeighbours(int[,] cellArray, int i, int j)
         {
             int neighbours = 0;
 

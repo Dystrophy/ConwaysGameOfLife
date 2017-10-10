@@ -4,26 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace ConwaysGameOfLife.Helpers
 {
-    public static class GridHelper
+    public class GridHelper
     {
-        
-        public static void RenderGrid(int[,] nextGenerationArray)
+        CellHelper cellHelper;
+
+        public GridHelper()
+        {
+            cellHelper = new CellHelper();
+        }
+
+        public int[,] RenderGrid(int[,] generationArray)
         {
             Console.Clear();
-            for (int i = 0; i < nextGenerationArray.GetLength(0); i++)
+            for (int i = 0; i < generationArray.GetLength(0); i++)
             {
-                for (int j = 0; j < nextGenerationArray.GetLength(1); j++)
+                for (int j = 0; j < generationArray.GetLength(1); j++)
                 {
-                    Console.Write(nextGenerationArray[i, j]);
+                    Console.Write(generationArray[i, j]);
                 }
                 Console.WriteLine();
             }
+            return GenerateNextGeneration(generationArray);
         }
 
-        public static int[,] GenerateNextGeneration(int[,] currentGenerationArray)
+        public int[,] GenerateNextGeneration(int[,] currentGenerationArray)
         {
             int[,] nextGenerationArray = new int[currentGenerationArray.GetLength(0),currentGenerationArray.GetLength(1)];
 
@@ -31,13 +39,13 @@ namespace ConwaysGameOfLife.Helpers
             {
                 for (int j = 0; j < currentGenerationArray.GetLength(1); j++)
                 {
-                    CellHelper.GetNextGeneration(currentGenerationArray);
+                    cellHelper.GetNextGeneration(currentGenerationArray);
                 }
             }
             return nextGenerationArray;
         }
 
-        public static int[,] CreateInitialContainer(int[,] currentGeneration = null, int xSize = 10, int ySize = 10)
+        public int[,] CreateInitialContainer(int[,] currentGeneration = null, int xSize = 10, int ySize = 10)
         {
             var initialState = new int[xSize, ySize];
 
@@ -57,11 +65,8 @@ namespace ConwaysGameOfLife.Helpers
             return initialState;
         }
 
-        
-
-        public static int[,] GenerateGlider()
+        public int[,] GenerateGlider()
         {
-
             var gliderState = CreateInitialContainer();
             gliderState[0, 1] = 1;
             gliderState[1, 2] = 1;
@@ -71,6 +76,7 @@ namespace ConwaysGameOfLife.Helpers
 
             return gliderState;
         }
+
 
     }
 }

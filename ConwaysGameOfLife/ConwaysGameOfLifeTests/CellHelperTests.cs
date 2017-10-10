@@ -7,10 +7,19 @@ namespace ConwaysGameOfLifeTests
     [TestClass]
     public class CellHelperTests
     {
+        GridHelper gridHelper;
+        CellHelper cellHelper;
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            gridHelper = new GridHelper();
+            cellHelper = new CellHelper();
+        }
+
         [TestMethod]
         public void GetNextGeneration_ReturnsAnArrayOfSameSizeAsPassedArray()
         {
-            var returnedVal = CellHelper.GetNextGeneration(new int[3, 3]);
+            var returnedVal = cellHelper.GetNextGeneration(new int[3, 3]);
 
             Assert.IsTrue(returnedVal.GetLength(0) == 3);
             Assert.IsTrue(returnedVal.GetLength(1) == 3);
@@ -20,7 +29,7 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void IsCellAlive_Returns1WhenCellHas2Neighbours()
         {
-            var returnedVal = CellHelper.IsCellAlive(2);
+            var returnedVal = cellHelper.IsCellAlive(2);
 
             Assert.AreEqual(1, returnedVal);
         }
@@ -28,7 +37,7 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void IsCellAlive_Returns0WhenCellHasMoreThan3Neighbours()
         {
-            var returnedVal = CellHelper.IsCellAlive(4);
+            var returnedVal = cellHelper.IsCellAlive(4);
 
             Assert.AreEqual(0, returnedVal);
         }
@@ -36,7 +45,7 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void IsCellAlive_Returns0WhenCellHasLessThan2Neighbours()
         {
-            var returnedVal = CellHelper.IsCellAlive(1);
+            var returnedVal = cellHelper.IsCellAlive(1);
 
             Assert.AreEqual(0, returnedVal);
         }
@@ -50,7 +59,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[1, 0] = 1;
             cellArray[1, 1] = 1;
 
-            var neighbours = CellHelper.GetCellNeighbours(cellArray, 0, 0);
+            var neighbours = cellHelper.GetCellNeighbours(cellArray, 0, 0);
 
             Assert.IsTrue(neighbours == 3);
         }
@@ -71,7 +80,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[2, 1] = 0;
             cellArray[2, 2] = 0;
 
-            var neighbours = CellHelper.GetCellNeighbours(cellArray, 1, 1);
+            var neighbours = cellHelper.GetCellNeighbours(cellArray, 1, 1);
 
             Assert.IsTrue(neighbours == 0);
         }
@@ -81,7 +90,7 @@ namespace ConwaysGameOfLifeTests
         {
             var cellArray = new int[2, 2];
 
-            var returnedGeneration = CellHelper.GetNextGeneration(cellArray);
+            var returnedGeneration = cellHelper.GetNextGeneration(cellArray);
 
             Assert.IsTrue(cellArray.GetLength(0) == returnedGeneration.GetLength(0));
             Assert.IsTrue(cellArray.GetLength(1) == returnedGeneration.GetLength(1));
@@ -97,12 +106,13 @@ namespace ConwaysGameOfLifeTests
             cellArray[1, 0] = 1;
             cellArray[1, 1] = 1;
 
-            var returnedArray = CellHelper.GetNextGeneration(cellArray);
+            var returnedArray = cellHelper.GetNextGeneration(cellArray);
 
             Assert.IsTrue(returnedArray[0, 0] == 1);
             Assert.IsTrue(returnedArray[0, 1] == 1);
             Assert.IsTrue(returnedArray[1, 1] == 1);
             Assert.IsTrue(returnedArray[1, 1] == 1);
         }
+
     }
 }
