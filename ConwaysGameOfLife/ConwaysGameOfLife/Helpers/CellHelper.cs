@@ -10,32 +10,27 @@ namespace ConwaysGameOfLife.Helpers
     {
         public int[,] GetNextGeneration(int[,] currentCellArray)
         {
+            int isAlive;
+            int neighbours;
             int[,] nextGenerationCellArray = new int[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
-            for(int i = 0; i < currentCellArray.GetLength(1); i++)
+            for(int i = 0; i < nextGenerationCellArray.GetLength(0); i++)
             {
-                for(int j = 0; j < currentCellArray.GetLength(0); j++)
+                for(int j = 0; j < nextGenerationCellArray.GetLength(1); j++)
                 {
-                    nextGenerationCellArray[i, j] = IsCellAlive(GetCellNeighbours(currentCellArray, i, j));
+                    neighbours = GetCellNeighbours(currentCellArray, i, j);
+                    isAlive = IsCellAlive(neighbours, currentCellArray[i, j]);
+                    nextGenerationCellArray[i , j] = isAlive;
                 }
             }
 
             return nextGenerationCellArray;
         }
 
-        public int IsCellAlive(int numberOfNeighbours)
-        {
-            if (numberOfNeighbours > 3 || numberOfNeighbours < 2)
-            {
-                return 0;
-            }
-            return 1;
-        }
 
         public int GetCellNeighbours(int[,] cellArray, int i, int j)
         {
             int neighbours = 0;
-
-
+            
             if (i + 1 < cellArray.GetLength(0))
             {
                 if (cellArray[i + 1, j] == 1)
@@ -48,9 +43,7 @@ namespace ConwaysGameOfLife.Helpers
                         neighbours++;
                 }
             }
-
-
-
+            
             if(i > 0)
             {
                 if (cellArray[i - 1, j] == 1)
@@ -80,6 +73,21 @@ namespace ConwaysGameOfLife.Helpers
             }
 
             return neighbours;
+        }
+
+        public int IsCellAlive(int numberOfNeighbours, int cellValue)
+        {
+            if (cellValue == 0 && numberOfNeighbours == 3)
+            {
+                return 1;
+            }
+
+            if (cellValue == 1 && (numberOfNeighbours == 3 || numberOfNeighbours == 2))
+            {
+                return 1;
+            }
+
+            return 0;
         }
     }
 }

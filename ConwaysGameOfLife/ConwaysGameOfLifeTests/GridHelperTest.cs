@@ -27,22 +27,12 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void GenerateNextGeneration_ReturnsNew2DIntArray_OfSameSizeAsPassedArray()
         {
-            var returnedVal = gridHelper.GenerateNextGeneration(new int[10,10]);
+            var returnedVal = gridHelper.GenerateNextGeneration(new int[10, 10]);
 
             Assert.AreEqual(10, returnedVal.GetLength(0));
             Assert.AreEqual(10, returnedVal.GetLength(1));
         }
-
-        [TestMethod]
-        public void CreateInitialContainer_ReturnsArrayOfAllZeroes()
-        {
-            var returnedArray = gridHelper.CreateInitialContainer();
-
-            Assert.IsTrue(returnedArray[0, 0] == 0);
-            Assert.IsTrue(returnedArray[0, 9] == 0);
-            Assert.IsTrue(returnedArray[9, 0] == 0);
-            Assert.IsTrue(returnedArray[9, 9] == 0);
-        }
+        
 
         [TestMethod]
         public void GenerateGlider_ReturnsAGLider()
@@ -56,7 +46,7 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(returnedArray[2, 0] == 1);
         }
         [TestMethod]
-        public void AGlider_WillGenerateApprpriatecells_OnNextGeneration()
+        public void AGlider_WillGenerateAppropriateCells_OnNextGeneration()
         {
             var returnedArray = gridHelper.GenerateGlider();
 
@@ -67,6 +57,8 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(nextGeneration[2, 2] == 1);
             Assert.IsTrue(nextGeneration[2, 1] == 1);
             Assert.IsTrue(nextGeneration[3, 1] == 1);
+
+            
         }
         [TestMethod]
         public void CreateInitialContainer_SetsIntialStateOfGame_ToStateThatIsPassedIn()
@@ -80,6 +72,21 @@ namespace ConwaysGameOfLifeTests
             Assert.IsTrue(returnedArray[2, 2] == 1);
             Assert.IsTrue(returnedArray[2, 1] == 1);
             Assert.IsTrue(returnedArray[2, 0] == 1);
+        }
+
+        [TestMethod]
+        public void GenerateNextGeneration_CellWillBecomeAliveWhenExactly3Neighbours()
+        {
+            var cellArray = new int[2, 2];
+
+            cellArray[0, 0] = 0;
+            cellArray[0, 1] = 1;
+            cellArray[1, 0] = 1;
+            cellArray[1, 1] = 1;
+
+            var returnedArray = cellHelper.GetNextGeneration(cellArray);
+
+            Assert.IsTrue(returnedArray[0, 0] == 1);
         }
 
 
