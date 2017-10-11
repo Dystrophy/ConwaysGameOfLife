@@ -42,9 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\CellHelper.cs" />
+    <Compile Include="Helpers\CellDomain.cs" />
     <Compile Include="Helpers\ConwayTimer.cs" />
-    <Compile Include="Helpers\GridHelper.cs" />
+    <Compile Include="Helpers\GridDomain.cs" />
+    <Compile Include="Helpers\GridPresentation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ConwaysGameOfLife.Helpers;
-using System.Timers;
+﻿using System.Timers;
 
 namespace ConwaysGameOfLife.Helpers
 {
     public class ConwayTimer
     {
-        public CellHelper CellHelper;
-        public GridHelper GridHelper;
+        public GridPresentation Renderer;
+        public GridDomain GridHelper;
+
         public int[,] GenerationArray;
 
-        public ConwayTimer()
+        public ConwayTimer(int xSize, int ySize)
         {
-            this.CellHelper = new CellHelper();
-            this.GridHelper = new GridHelper();
+            this.GridHelper = new GridDomain(xSize, ySize);
+            this.Renderer = new GridPresentation();
             this.GenerationArray = null;
         }
 
@@ -36,16 +31,16 @@ namespace ConwaysGameOfLife.Helpers
         {
             if(this.GenerationArray == null)
             {
+                //GenerateGlider GenerateBlinker GenerateGosperGliderGun
                 GenerationArray = GridHelper.CreateInitialContainer(GridHelper.GenerateGlider());
             }
 
-            GridHelper.RenderGrid(GenerationArray);
+            Renderer.RenderArray(GenerationArray);
             SetNextGeneration(GenerationArray);
         }
 
         public void SetNextGeneration(int[,] currentGeneration)
         {
-            this.GenerationArray = null;
             this.GenerationArray = GridHelper.GenerateNextGeneration(currentGeneration);
         }
     }

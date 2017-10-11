@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ConwaysGameOfLife.Helpers;
 
 namespace ConwaysGameOfLife
@@ -11,9 +7,9 @@ namespace ConwaysGameOfLife
     {
         static void Main(string[] args)
         {
-            ConwayTimer timer = new ConwayTimer();
+            ConwayTimer timer = new ConwayTimer(20,40);
 
-            var aTimer = timer.GetTimer(1000);
+            var aTimer = timer.GetTimer(500);
 
             aTimer.Start();
 

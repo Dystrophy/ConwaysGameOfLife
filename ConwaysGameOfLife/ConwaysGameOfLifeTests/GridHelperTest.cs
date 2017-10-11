@@ -1,5 +1,4 @@
-﻿using System;
-using ConwaysGameOfLife.Helpers;
+﻿using ConwaysGameOfLife.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConwaysGameOfLifeTests
@@ -7,13 +6,14 @@ namespace ConwaysGameOfLifeTests
     [TestClass]
     public class GridHelperTest
     {
-        GridHelper gridHelper;
-        CellHelper cellHelper;
+        GridDomain gridHelper;
+        CellDomain cellHelper;
+
         [TestInitialize]
         public void TestInitialize()
         {
-            gridHelper = new GridHelper();
-            cellHelper = new CellHelper();
+            gridHelper = new GridDomain(10, 10);
+            cellHelper = new CellDomain();
         }
 
         [TestMethod]
@@ -50,7 +50,7 @@ namespace ConwaysGameOfLifeTests
         {
             var returnedArray = gridHelper.GenerateGlider();
 
-            var nextGeneration = cellHelper.GetNextGeneration(returnedArray);
+            var nextGeneration = cellHelper.GetNextCellGeneration(returnedArray);
 
             Assert.IsTrue(nextGeneration[1, 0] == 1);
             Assert.IsTrue(nextGeneration[1, 2] == 1);
@@ -84,7 +84,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[1, 0] = 1;
             cellArray[1, 1] = 1;
 
-            var returnedArray = cellHelper.GetNextGeneration(cellArray);
+            var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
             Assert.IsTrue(returnedArray[0, 0] == 1);
         }

@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ConwaysGameOfLife.Helpers
+﻿namespace ConwaysGameOfLife.Helpers
 {
-    public class CellHelper
+    public class CellDomain
     {
-        public int[,] GetNextGeneration(int[,] currentCellArray)
+        public int[,] GetNextCellGeneration(int[,] currentCellArray)
         {
             int isAlive;
             int neighbours;

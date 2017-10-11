@@ -1,5 +1,4 @@
-﻿using System;
-using ConwaysGameOfLife.Helpers;
+﻿using ConwaysGameOfLife.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ConwaysGameOfLifeTests
@@ -7,19 +6,19 @@ namespace ConwaysGameOfLifeTests
     [TestClass]
     public class CellHelperTests
     {
-        GridHelper gridHelper;
-        CellHelper cellHelper;
+        GridDomain gridHelper;
+        CellDomain cellHelper;
         [TestInitialize]
         public void TestInitialize()
         {
-            gridHelper = new GridHelper();
-            cellHelper = new CellHelper();
+            gridHelper = new GridDomain(20, 20);
+            cellHelper = new CellDomain();
         }
 
         [TestMethod]
         public void GetNextGeneration_ReturnsAnArrayOfSameSizeAsPassedArray()
         {
-            var returnedVal = cellHelper.GetNextGeneration(new int[3, 3]);
+            var returnedVal = cellHelper.GetNextCellGeneration(new int[3, 3]);
 
             Assert.IsTrue(returnedVal.GetLength(0) == 3);
             Assert.IsTrue(returnedVal.GetLength(1) == 3);
@@ -99,7 +98,7 @@ namespace ConwaysGameOfLifeTests
         {
             var cellArray = new int[2, 2];
 
-            var returnedGeneration = cellHelper.GetNextGeneration(cellArray);
+            var returnedGeneration = cellHelper.GetNextCellGeneration(cellArray);
 
             Assert.IsTrue(cellArray.GetLength(0) == returnedGeneration.GetLength(0));
             Assert.IsTrue(cellArray.GetLength(1) == returnedGeneration.GetLength(1));
@@ -115,7 +114,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[1, 0] = 1;
             cellArray[1, 1] = 1;
 
-            var returnedArray = cellHelper.GetNextGeneration(cellArray);
+            var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
             Assert.IsTrue(returnedArray[0, 0] == 1);
         }
@@ -130,7 +129,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[1, 0] = 0;
             cellArray[1, 1] = 0;
 
-            var returnedArray = cellHelper.GetNextGeneration(cellArray);
+            var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
             Assert.IsTrue(returnedArray[0, 0] == 0);
         }
@@ -151,7 +150,7 @@ namespace ConwaysGameOfLifeTests
             cellArray[2, 0] = 1;
             cellArray[2, 1] = 0;
             cellArray[2, 2] = 1;
-            var returnedArray = cellHelper.GetNextGeneration(cellArray);
+            var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
             Assert.IsTrue(returnedArray[1, 1] == 0);
         }
