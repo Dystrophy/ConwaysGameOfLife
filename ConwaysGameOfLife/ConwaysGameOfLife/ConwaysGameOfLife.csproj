@@ -46,7 +46,6 @@
     <Compile Include="Helpers\ConwayTimer.cs" />
     <Compile Include="Helpers\GridDomain.cs" />
     <Compile Include="Helpers\GridPresentation.cs" />
-    <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\Grid.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

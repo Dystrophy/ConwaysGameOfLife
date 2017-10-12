@@ -7,9 +7,9 @@
         //Remove all instances of Integers being set to 0 or 1 and replace with a Cell object
         //Cell objects should have a factory method
 
-        public int[,] GetNextCellGeneration(int[,] currentCellArray)
+        public bool[,] GetNextCellGeneration(bool[,] currentCellArray)
         {
-            int[,] nextGenerationCellArray = new int[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
+            bool[,] nextGenerationCellArray = new bool[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
             for(int i = 0; i < nextGenerationCellArray.GetLength(0); i++)
             {
                 for(int j = 0; j < nextGenerationCellArray.GetLength(1); j++)
@@ -22,67 +22,67 @@
         }
 
 
-        public int GetCellNeighbours(int[,] cellArray, int i, int j)
+        public int GetCellNeighbours(bool[,] cellArray, int i, int j)
         {
             int neighbours = 0;
             
             if (i + 1 < cellArray.GetLength(0))
             {
-                if (cellArray[i + 1, j] == 1)
+                if (cellArray[i + 1, j] == true)
                     neighbours++;
                 if (j + 1 < cellArray.GetLength(1))
                 {
-                    if (cellArray[i + 1, j + 1] == 1)
+                    if (cellArray[i + 1, j + 1] == true)
                         neighbours++;
-                    if (cellArray[i, j + 1] == 1)
+                    if (cellArray[i, j + 1] == true)
                         neighbours++;
                 }
             }
             
             if(i > 0)
             {
-                if (cellArray[i - 1, j] == 1)
+                if (cellArray[i - 1, j] == true)
                     neighbours++;
                 if (j + 1 < cellArray.GetLength(1))
                 {
-                    if (cellArray[i - 1, j + 1] == 1)
+                    if (cellArray[i - 1, j + 1] == true)
                         neighbours++;
                 }
             }
 
             if(j > 0)
             {
-                if (cellArray[i, j - 1] == 1)
+                if (cellArray[i, j - 1] == true)
                     neighbours++;
                 if (i + 1 < cellArray.GetLength(0))
                 {
-                    if (cellArray[i + 1, j - 1] == 1)
+                    if (cellArray[i + 1, j - 1] == true)
                         neighbours++;
                 }
             }
 
             if(i > 0 && j > 0)
             {
-                if (cellArray[i - 1, j - 1] == 1)
+                if (cellArray[i - 1, j - 1] == true)
                     neighbours++;
             }
 
             return neighbours;
         }
 
-        public int IsCellAlive(int numberOfNeighbours, int cellValue)
+        public bool IsCellAlive(int numberOfNeighbours, bool cellValue)
         {
-            if (cellValue == 0 && numberOfNeighbours == 3)
+            if (cellValue == false && numberOfNeighbours == 3)
             {
-                return 1;
+                return true;
             }
 
-            if (cellValue == 1 && (numberOfNeighbours == 3 || numberOfNeighbours == 2))
+            if (cellValue == true && (numberOfNeighbours == 3 || numberOfNeighbours == 2))
             {
-                return 1;
+                return true;
             }
 
-            return 0;
+            return false;
         }
     }
 }

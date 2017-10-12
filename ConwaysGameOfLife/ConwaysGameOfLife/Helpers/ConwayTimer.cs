@@ -7,7 +7,7 @@ namespace ConwaysGameOfLife.Helpers
         public GridPresentation Renderer;
         public GridDomain GridHelper;
 
-        public int[,] GenerationArray;
+        public bool[,] GenerationArray;
 
         public ConwayTimer(int xSize, int ySize)
         {
@@ -39,7 +39,7 @@ namespace ConwaysGameOfLife.Helpers
             SetNextGeneration(GenerationArray);
         }
 
-        public void SetNextGeneration(int[,] currentGeneration)
+        public void SetNextGeneration(bool[,] currentGeneration)
         {
             this.GenerationArray = GridHelper.GenerateNextGeneration(currentGeneration);
         }

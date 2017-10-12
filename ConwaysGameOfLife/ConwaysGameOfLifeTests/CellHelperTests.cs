@@ -18,54 +18,54 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void GetNextGeneration_ReturnsAnArrayOfSameSizeAsPassedArray()
         {
-            var returnedVal = cellHelper.GetNextCellGeneration(new int[3, 3]);
+            var returnedVal = cellHelper.GetNextCellGeneration(new bool[3, 3]);
 
             Assert.IsTrue(returnedVal.GetLength(0) == 3);
             Assert.IsTrue(returnedVal.GetLength(1) == 3);
         }
 
         [TestMethod]
-        public void DeadCellWithExactly3Neighbours_WillBeAliveNExtGneration()
+        public void DeadCellWithExactly3Neighbours_WillBeAliveNextGneration()
         {
-            var returnedVal = cellHelper.IsCellAlive(3, 0);
+            var returnedVal = cellHelper.IsCellAlive(3, false);
 
-            Assert.AreEqual(1, returnedVal);
+            Assert.AreEqual(true, returnedVal);
         }
 
 
 
         [TestMethod]
-        public void IsCellAlive_Returns1WhenCellHas2Neighbours()
+        public void IsCellAlive_ReturnsTrueWhenCellHas2Neighbours()
         {
-            var returnedVal = cellHelper.IsCellAlive(2, 1);
+            var returnedVal = cellHelper.IsCellAlive(2, true);
 
-            Assert.AreEqual(1, returnedVal);
+            Assert.AreEqual(true, returnedVal);
         }
 
         [TestMethod]
-        public void IsCellAlive_Returns0WhenCellHasMoreThan3Neighbours()
+        public void IsCellAlive_ReturnsFalseWhenCellHasMoreThan3Neighbours()
         {
-            var returnedVal = cellHelper.IsCellAlive(4, 1);
+            var returnedVal = cellHelper.IsCellAlive(4, true);
 
-            Assert.AreEqual(0, returnedVal);
+            Assert.AreEqual(false, returnedVal);
         }
 
         [TestMethod]
-        public void IsCellAlive_Returns0WhenCellHasLessThan2Neighbours()
+        public void IsCellAlive_ReturnsFalseWhenCellHasLessThan2Neighbours()
         {
-            var returnedVal = cellHelper.IsCellAlive(1, 1);
+            var returnedVal = cellHelper.IsCellAlive(1, true);
 
-            Assert.AreEqual(0, returnedVal);
+            Assert.AreEqual(false, returnedVal);
         }
 
         [TestMethod]
         public void GetCellNeighbours_Returns3_WhenGiveAPositionWith3Neighbours()
         {
-            var cellArray = new int[2, 2];
-            cellArray[0, 0] = 1;
-            cellArray[0, 1] = 1;
-            cellArray[1, 0] = 1;
-            cellArray[1, 1] = 1;
+            var cellArray = new bool[2, 2];
+            cellArray[0, 0] = true;
+            cellArray[0, 1] = true;
+            cellArray[1, 0] = true;
+            cellArray[1, 1] = true;
 
             var neighbours = cellHelper.GetCellNeighbours(cellArray, 0, 0);
 
@@ -75,18 +75,18 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void GetCellNeighbours_Returns0_WhenGivenAPositionWith0Neighbours()
         {
-            var cellArray = new int[3, 3];
-            cellArray[0, 0] = 0;
-            cellArray[0, 1] = 0;
-            cellArray[0, 2] = 0;
+            var cellArray = new bool[3, 3];
+            cellArray[0, 0] = false;
+            cellArray[0, 1] = false;
+            cellArray[0, 2] = false;
 
-            cellArray[1, 0] = 0;
-            cellArray[1, 1] = 1;
-            cellArray[1, 2] = 0;
+            cellArray[1, 0] = false;
+            cellArray[1, 1] = true;
+            cellArray[1, 2] = false;
 
-            cellArray[2, 0] = 0;
-            cellArray[2, 1] = 0;
-            cellArray[2, 2] = 0;
+            cellArray[2, 0] = false;
+            cellArray[2, 1] = false;
+            cellArray[2, 2] = false;
 
             var neighbours = cellHelper.GetCellNeighbours(cellArray, 1, 1);
 
@@ -96,7 +96,7 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void GetNextGeneration_ReturnsArrayWithSameSize()
         {
-            var cellArray = new int[2, 2];
+            var cellArray = new bool[2, 2];
 
             var returnedGeneration = cellHelper.GetNextCellGeneration(cellArray);
 
@@ -107,52 +107,52 @@ namespace ConwaysGameOfLifeTests
         [TestMethod]
         public void GetNextGeneration_CellWillBecomeAliveWhen3Neighbours()
         {
-            var cellArray = new int[2, 2];
+            var cellArray = new bool[2, 2];
 
-            cellArray[0, 0] = 0;
-            cellArray[0, 1] = 1;
-            cellArray[1, 0] = 1;
-            cellArray[1, 1] = 1;
+            cellArray[0, 0] = false;
+            cellArray[0, 1] = true;
+            cellArray[1, 0] = true;
+            cellArray[1, 1] = true;
 
             var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
-            Assert.IsTrue(returnedArray[0, 0] == 1);
+            Assert.IsTrue(returnedArray[0, 0] == true);
         }
 
         [TestMethod]
         public void ACellWithLessThan2Neighbours_WillDie_NextGeneration()
         {
-            var cellArray = new int[2, 2];
+            var cellArray = new bool[2, 2];
 
-            cellArray[0, 0] = 1;
-            cellArray[0, 1] = 0;
-            cellArray[1, 0] = 0;
-            cellArray[1, 1] = 0;
+            cellArray[0, 0] = true;
+            cellArray[0, 1] = false;
+            cellArray[1, 0] = false;
+            cellArray[1, 1] = false;
 
             var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
-            Assert.IsTrue(returnedArray[0, 0] == 0);
+            Assert.IsTrue(returnedArray[0, 0] == false);
         }
 
         [TestMethod]
         public void ACellWithMoreThan3Neighbours_WillDie_NextGeneration()
         {
-            var cellArray = new int[3, 3];
+            var cellArray = new bool[3, 3];
 
-            cellArray[0, 0] = 1;
-            cellArray[0, 1] = 0;
-            cellArray[0, 2] = 1;
+            cellArray[0, 0] = true;
+            cellArray[0, 1] = false;
+            cellArray[0, 2] = true;
 
-            cellArray[1, 0] = 0;
-            cellArray[1, 1] = 1;
-            cellArray[1, 2] = 0;
+            cellArray[1, 0] = false;
+            cellArray[1, 1] = true;
+            cellArray[1, 2] = false;
 
-            cellArray[2, 0] = 1;
-            cellArray[2, 1] = 0;
-            cellArray[2, 2] = 1;
+            cellArray[2, 0] = true;
+            cellArray[2, 1] = false;
+            cellArray[2, 2] = true;
             var returnedArray = cellHelper.GetNextCellGeneration(cellArray);
 
-            Assert.IsTrue(returnedArray[1, 1] == 0);
+            Assert.IsTrue(returnedArray[1, 1] == false);
         }
 
     }

@@ -11,14 +11,13 @@ namespace ConwaysGameOfLife.Models
     {
         public int SizeX;
         public int SizeY;
-        public Cell[,] GridArray;
+        public bool[,] GridArray;
 
         public Grid(int sizeX, int sizeY)
         {
             this.SizeX = sizeX;
             this.SizeY = sizeY;
-            this.GridArray = new Cell[this.SizeX, this.SizeY];
+            this.GridArray = new bool[this.SizeX, this.SizeY];
         }
-
     }
 }
