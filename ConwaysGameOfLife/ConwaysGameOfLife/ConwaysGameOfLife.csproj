@@ -42,10 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers\CellDomain.cs" />
     <Compile Include="Helpers\ConwayTimer.cs" />
-    <Compile Include="Helpers\GridDomain.cs" />
-    <Compile Include="Helpers\GridPresentation.cs" />
+    <Compile Include="Presentation\GridPresentation.cs" />
     <Compile Include="Models\Grid.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,9 +51,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domain\" />
-    <Folder Include="Factory\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

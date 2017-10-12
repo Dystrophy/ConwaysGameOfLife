@@ -1,19 +1,17 @@
 ﻿using System.Timers;
+using ConwaysGameOfLife.Models;
 
 namespace ConwaysGameOfLife.Helpers
 {
     public class ConwayTimer
     {
         public GridPresentation Renderer;
-        public GridDomain GridHelper;
-
-        public bool[,] GenerationArray;
+        public Grid GameGrid;
 
         public ConwayTimer(int xSize, int ySize)
         {
-            this.GridHelper = new GridDomain(xSize, ySize);
+            this.GameGrid = new Grid(xSize, ySize);
             this.Renderer = new GridPresentation();
-            this.GenerationArray = null;
         }
 
 
@@ -23,25 +21,25 @@ namespace ConwaysGameOfLife.Helpers
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Interval = interval;
             timer.Enabled = true;
-            
+            GameGrid.GridArray = null;
             return timer;
         }
 
         public void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            if(this.GenerationArray == null)
+            if(this.GameGrid.GridArray == null)
             {
                 //GenerateGlider GenerateBlinker GenerateGosperGliderGun
-                GenerationArray = GridHelper.CreateInitialContainer(GridHelper.GenerateGlider());
+                this.GameGrid.GridArray = GameGrid.CreateInitialContainer(GameGrid.GenerateGlider());
             }
 
-            Renderer.RenderArray(GenerationArray);
-            SetNextGeneration(GenerationArray);
+            Renderer.RenderArray(GameGrid.GridArray);
+            SetNextGeneration(GameGrid.GridArray);
         }
 
         public void SetNextGeneration(bool[,] currentGeneration)
         {
-            this.GenerationArray = GridHelper.GenerateNextGeneration(currentGeneration);
+            this.GameGrid.GridArray = GameGrid.GenerateNextGeneration(currentGeneration);
         }
     }
 }
