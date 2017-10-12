@@ -1,21 +1,24 @@
-﻿namespace ConwaysGameOfLife.Helpers
+﻿using ConwaysGameOfLife.Models;
+
+namespace ConwaysGameOfLife.Helpers
 {
     public class GridDomain
     {
         public CellDomain CellHelper;
-
-        int xSize;
-        int ySize;
-
+       
+        public int SizeX;
+        public int SizeY;
+        
         public GridDomain(int x, int y)
         {
             this.CellHelper = new CellDomain();
-            this.xSize = x;
-            this.ySize = y;
+            this.SizeX = x;
+            this.SizeY = y;
         }
 
         public int[,]  GenerateNextGeneration(int[,] currentGenerationArray)
         {
+            //Remove all Int Arrays and begin refactoring
             int[,] nextGenerationArray = new int[currentGenerationArray.GetLength(0),currentGenerationArray.GetLength(1)];
 
             nextGenerationArray = CellHelper.GetNextCellGeneration(currentGenerationArray);
@@ -25,6 +28,8 @@
 
         public int[,] CreateInitialContainer(int[,] currentGeneration = null, int xSize = 20, int ySize = 40)
         {
+            //Begin Refactoring - Remove all the Int Arrays and Replace with Grid Objects
+            //var initialS = new Grid(this.SizeX, this.SizeY);
             var initialState = new int[xSize, ySize];
 
             if(currentGeneration != null)

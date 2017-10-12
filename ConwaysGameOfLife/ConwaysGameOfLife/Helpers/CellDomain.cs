@@ -2,18 +2,19 @@
 {
     public class CellDomain
     {
+
+        //Begin Refactoring - Remove all Integer arrays and replace with Grid Objects
+        //Remove all instances of Integers being set to 0 or 1 and replace with a Cell object
+        //Cell objects should have a factory method
+
         public int[,] GetNextCellGeneration(int[,] currentCellArray)
         {
-            int isAlive;
-            int neighbours;
             int[,] nextGenerationCellArray = new int[currentCellArray.GetLength(0), currentCellArray.GetLength(1)];
             for(int i = 0; i < nextGenerationCellArray.GetLength(0); i++)
             {
                 for(int j = 0; j < nextGenerationCellArray.GetLength(1); j++)
                 {
-                    neighbours = GetCellNeighbours(currentCellArray, i, j);
-                    isAlive = IsCellAlive(neighbours, currentCellArray[i, j]);
-                    nextGenerationCellArray[i , j] = isAlive;
+                    nextGenerationCellArray[i, j] = IsCellAlive(GetCellNeighbours(currentCellArray, i, j), currentCellArray[i, j]);
                 }
             }
 
